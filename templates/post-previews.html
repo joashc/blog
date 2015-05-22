@@ -1,0 +1,33 @@
+<br>
+$for(posts)$
+  <h1 class="preview-title">
+    <a href="$url$" style="background-image: none">$title$</a>
+  </h1> 
+  <div class="preview-info">
+  $if(series)$
+    Part $part$ of the series <i>$series$</i>.
+  $endif$
+  <div><i>$date$</i></div>
+  </div>
+  <p>
+  <p>
+  $if(teaser)$
+  <div class="preview">
+     $teaser$
+  </div>
+   <a href="$url$"><b>More...</b></a>
+   $endif$
+   <p>
+   <br>
+   <br>
+   <br>
+$endfor$
+
+$if(previousPageNum)$
+  <a href="$previousPageUrl$"><b>Previous</b></a>
+$endif$
+$if(nextPageNum)$
+  <span style="float:right">
+    <a href="$nextPageUrl$"><b>Next</b></a>
+  </span>
+$endif$

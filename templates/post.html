@@ -1,0 +1,30 @@
+<h1 class="preview-title">$title$</h1> 
+<div class="preview-info">
+$if(series)$
+  Part $part$ of the series <i>$series$</i>.
+$endif$
+<div><i>$date$</i></div>
+</div>
+<p>
+
+$body$
+
+<div class="info">
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.min.js"></script>
+<script type="text/javascript" src="/css/footnote.js"></script>
+
+$if(scriptName)$
+<script>
+  var mountPoints = $$("pre").filter(function() { return $$(this).text() === "mountPoint"; });
+  mountPoints.forEach(function (item, index) {
+    var ele = $$(item);
+    ele.text("");
+    ele.attr("id", "mount" + index);
+  });
+</script>
+<script type="text/javascript" src="/js/$scriptName$"></script>
+$endif$
+$if(workerName)$
+<script type="text/javascript" src="/js/$workerName$"></script>
+$endif$

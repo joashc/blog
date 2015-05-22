@@ -1,0 +1,25 @@
+# Created by https://www.gitignore.io/api/aske,haskell
+
+#!! ERROR: aske is undefined. Use list command to see defined gitignore types !!#
+
+### Haskell ###
+_site/
+_cache/
+dist
+cabal-dev
+*.o
+*.hi
+*.chi
+*.chs.h
+*.dyn_o
+*.dyn_hi
+.hpc
+.hsenv
+.cabal-sandbox/
+cabal.sandbox.config
+*.prof
+*.aux
+*.hp
+.stack-work/
+
+node_modules/
