@@ -25,28 +25,28 @@ Similarly, we can define another forgetful functor \\(\\it{A}: \\bf{Rng} \\right
 Forgetting monoids
 ------------------
 
-The forgetful functor \\(\\it{A}\\) forgets ring multiplication. What happens if instead you forget addition? You get monoids!  Monoids have objects \\((M, \\cdot, e)\\), where \\(M\\) is a set, \\(\\cdot\\) is an associative binary operation, and \\(e\\) is the neutral element of that operation.
+The forgetful functor \\(\\it{A}\\) forgets ring multiplication. What happens if instead you forget addition? You get monoids!  We can define monoids as the triple \\((S, \\cdot, e)\\), where \\(S\\) is a set, \\(\\cdot\\) is an associative binary operation, and \\(e\\) is the neutral element of that operation.
 
-The forgetful functor \\(\\it{M}: \\bf{Ring} \\rightarrow \\bf{Mon}\\) maps to the category of monoids, \\(\\bf{Mon}\\), in which the objects are monoids, and the morphisms are monoid homomorphisms.
+The forgetful functor \\(\\it{M}: \\bf{Ring} \\rightarrow \\bf{Mon}\\) maps from the category of rings to the category of monoids, \\(\\bf{Mon}\\), in which the objects are monoids, and the morphisms are monoid homomorphisms.
 
-Monoid homomorphisms map between monoids in a way that preserves their monoidal properties. Given \\(M\\), a monoid defined by \\((m, \*, e)\\), and \\(N\\), a monoid defined by \\((n, \*', f)\\), a function \\(\\it{\\phi}: M \\rightarrow N\\) from \\(M\\) to \\(N\\) is a monoid homomorphism iff:
+Monoid homomorphisms map between monoids in a way that preserves their monoidal properties. Given \\(\\mathcal{X}\\), a monoid defined by \\((X, \*, e)\\), and \\(\\mathcal{Y}\\), a monoid defined by \\((Y, \*', f)\\), a function \\(\\it{\\phi}: \\mathcal{X} \\rightarrow \\mathcal{Y}\\) from \\(\\mathcal{X}\\) to \\(\\mathcal{Y}\\) is a monoid homomorphism iff:
 
 it preserves compositionality[^4]:
-$$\begin{equation}\phi(a * b) = \phi(a) *' \phi(b), \forall a\; b \in N\end{equation}$$
+$$\begin{equation}\phi(a * b) = \phi(a) *' \phi(b), \forall a\; b \in \mathcal{X}\end{equation}$$
 
-[^4]: All homomorphisms have one constraint in common: they must preserve compositionality. We can be generalise the homomorphism constraint for any \\(n\\)-ary operation; a function \\(\\it{f}: A -> B\\) is a homomorphism between two algebraic structures of the same type if:
+[^4]: All homomorphisms have one constraint in common: they must preserve compositionality. We can be generalise the homomorphism constraint for any \\(n\\)-ary operation; a function \\(\\it{f}: A \\rightarrow B\\) is a homomorphism between two algebraic structures of the same type if:
 $$\it{f}(\mu_{A}(a_{1}, \ldots, a_{n})) = \mu_{B}(f(a_{1}), \ldots, f(a_n))$$
 for all \\(a_{1}, \\ldots, a_{n} \\in A\\)
 
-and additionally maps the identity element:
+and maps the identity element:
 $$\begin{equation}\phi(e) = f\end{equation}$$
 
-Translating into Haskell, if `phi` is a monoid homomorphism between monoid `M` to monoid `N`, then:
+Translating into Haskell, if `phi` is a monoid homomorphism between monoid `X` to monoid `Y`, then:
 
 ```haskell
-phi (mempty :: M) == mempty :: N              -- (1)
+phi (mappend a b) == mappend (phi a) (phi b)  -- (1)
 
-phi (mappend a b) == mappend (phi a) (phi b)  -- (2)
+phi (mempty :: X) == mempty :: Y              -- (2)
 ```
 
 For example, we can define a monoid homomorphism that maps from the list monoid to the `Sum` monoid, the monoid formed from the natural numbers under addition:
@@ -64,20 +64,21 @@ We can quickly check if `listToSum` is actually a monoid homomorphism:
 import Test.QuickCheck
 
 -- (1)
-listToSum (mempty :: [a]) == mempty :: Sum Int
--- True
-
--- (2)
 homomorphism :: [()] -> [()] -> Bool
-homomorphism a b = 
+homomorphism a b =
   phi (mappend a b) == mappend (phi a) (phi b)
     where phi = listToSum
 
 quickCheck homomorphism
--- OK, passed 100 tests.
+-- > OK, passed 100 tests.
+
+-- (2)
+listToSum (mempty :: [a]) == mempty :: Sum Int
+-- > True
+
 ```
 
-Let's forget some more things with yet another forgetful functor \\(\\it{U}: \\bf{Mon} \\rightarrow \\bf{Set}\\)[^5].
+Let's forget some more things with yet another forgetful functor, \\(\\it{U}: \\bf{Mon} \\rightarrow \\bf{Set}\\)[^5].
 
 [^5]: Technically, in Haskell we'd be mapping to the category \\(\\bf{Hask}\\), the category of Haskell types and functions.
 
@@ -85,10 +86,15 @@ Let's forget some more things with yet another forgetful functor \\(\\it{U}: \\b
 
 `Sum Int` would just become `Int`, `listToSum` would just become `length`, `mappend :: Sum a` would map to `(+)`, and so on. We forget that any of these things were ever part of a monoid.
 
+Natural Transformation
+----------------------
+
+
+
 Left Adjoint
 ------------
 
-  An adjuction \\(\\it{F} \\;\\vdash \\it{G}\\) between functors \\(\\it{F}: \\bf{D} \\rightarrow \\bf{C}\\) and \\(\\it{G}: \\bf{C} \\rightarrow \\bf{D}\\) means that 
+An adjuction \\(\\it{F} \\;\\vdash \\it{G}\\) between functors \\(\\it{F}: \\mathcal{D} \\rightarrow \\mathcal{C}\\) and \\(\\it{G}: \\mathcal{C} \\rightarrow \\mathcal{D}\\) means that 
 
 
 
