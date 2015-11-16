@@ -1,5 +1,7 @@
 ---
-title: Free monads
+title: Free monads in category theory
+series: Free monads
+part: II
 ---
 
 Forgetting how to multiply
@@ -22,6 +24,7 @@ Let's denote the category of all unital rings and their homomorphisms by \\(\\bf
 Similarly, we can define another forgetful functor \\(\\it{A}: \\bf{Rng} \\rightarrow \\bf{Ab}\\), which maps from the category of rngs to the category of abelian groups. \\(\\it{A}\\) discards the multiplicative binary operation, simply mapping all morphisms of multiplication to morphisms of addition.
 
 
+
 Forgetting monoids
 ------------------
 
@@ -42,6 +45,7 @@ for all \\(a_{1}, \\ldots, a_{n} \\in A\\)
 and maps the identity element:
 $$\begin{equation}\phi(e) = f\end{equation}$$
 
+<!--more-->
 
 Translating into Haskell, if `phi` is a monoid homomorphism between monoid `X` to monoid `Y`, then:
 
