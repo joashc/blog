@@ -30,12 +30,14 @@ var renderMathjaxForFile = (dir, fileName, callback) => {
 
 var postDir = "./_site/posts/";
 var pageDir = "./_site/blog";
+var projectDir = "./_site/projects";
 
 var posts = fs.readdirSync(postDir);
 var pages = fs.readdirSync(pageDir);
+var projects = fs.readdirSync(projectDir);
 
 // Wait for all of these and the homepage
-var pending = posts.length + pages.length + 1;
+var pending = posts.length + pages.length + projects.length + 1;
 
 var closeWhenDone = () => {
   pending -= 1;
@@ -49,5 +51,9 @@ posts.forEach(post => {
 });
 
 pages.forEach(page => {
+  renderMathjaxForFile(pageDir, page, closeWhenDone);
+});
+
+projects.forEach(page => {
   renderMathjaxForFile(pageDir, page, closeWhenDone);
 });
