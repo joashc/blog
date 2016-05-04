@@ -10,4 +10,4 @@ cd ~/blg
 git add -A
 git commit -m "Publish"
 
-
+git push

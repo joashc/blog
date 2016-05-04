@@ -8,7 +8,7 @@ Let's say you're doing some sort of Bayesian analysis. You'll have a prior \\(P(
 
 $$\pi(\theta) = P(\theta\vert D)=\dfrac{P(D\vert\theta)P(\theta)}{P(D)}$$
 
-Computing the numerator \\(P(D\\vert \\theta)P(\\theta)\\) is relatively straightforward. To calculate \\(P(D\\vert \\theta)\\), we can use a loss function to work how likely the observed data is, given the prior. And we have \\(P(\\theta)\\) because it's our prior, which means we can calculate \\(\\pi(\\theta)\\) up to the normalization constant \\(P(D)\\).
+If we can calculate \\(P(D\\vert \\theta)\\) by using some sort of loss function, computing the numerator \\(P(D\\vert \\theta)P(\\theta)\\) is relatively straightforward. And once we have the numerator, we've specified our posterior \\(\\pi(\\theta)\\) up to the normalization constant \\(P(D)\\).
 
 Computing the normalization constant is trickier. \\(P(D)\\) is the probability of seeing this data in the model, which means we have to integrate over all possible values of \\(\\theta\\):
 
@@ -17,7 +17,7 @@ $$P(D) = \int_{\Theta} P(D\vert\theta)P(\theta)\text{d}\theta$$
 In most cases[^conj], this won't have a closed-form solution, and deterministic numerical integration can scale poorly with increasing dimensionality.
 
 ## Monte Carlo integration
-Let's assume we can't easily compute this integral; we can turn to Monte Carlo methods to estimate it instead. If we can directly draw from the posterior distribution \\(\\pi(\\theta)\\)[^conj], we can simply compute the density of \\(\\pi(\\theta)\\) at a set of uniformly distributed values \\(\\theta_1, \\dots, \\theta_N\\) that cover a broad range of the parameter space for \\(\\theta\\):
+Let's assume we can't easily compute this integral; we can turn to Monte Carlo methods to estimate it instead. If we can directly draw from the posterior distribution \\(\\pi(\\theta)\\), we can simply compute the density of \\(\\pi(\\theta)\\) at a set of uniformly distributed values \\(\\theta_1, \\dots, \\theta_N\\) that cover a broad range of the parameter space for \\(\\theta\\):
 
 [^conj]: Usually this is only feasible in simple Bayesian models, particularly those with conjugate priors.
 
@@ -34,7 +34,7 @@ $$\begin{split} P(D) &= \int P(D\vert\theta)P(\theta)\text{d}\theta \\ &= \int \
 
 In theory, all we've done is divide and multiply by \\(q(\\theta)\\); it shouldn't really matter what \\(q(\\theta)\\) is[^sing]. But now, instead of trying to draw samples from \\(\\pi(\\theta)\\), we can draw them from \\(q(\\theta)\\), which *can* be some distribution that's easy to sample from. We can think of this as sampling from \\(q(\\theta)\\), and correcting the sample by multiplying by its importance weight, given by:
 
-[^sing]: Provided we didn't introduce any singularities
+[^sing]: Provided we didn't introduce any singularities.
 
 $$w(\theta) = \dfrac{P(D\vert \theta)P(\theta)}{q(\theta)}$$
 

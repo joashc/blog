@@ -232,7 +232,8 @@ new List<int>{1,2,3}
   )
   .SelectMany(
       transId => itemList,
-      (transId, item) => $"({transId.number}, {transId.letter}, {item.Name})"
+      (transId, item) => 
+        $"({transId.number}, {transId.letter}, {item.Name})"
   );
 ```
 
@@ -262,7 +263,8 @@ new List<int>{1,2,3}
   )
   .SelectMany(
       *2 => widget,
-      (*2, widget) => $"({number}, {letter}, {item.Name}, {widget.Id})"
+      (*2, widget) => 
+        $"({number}, {letter}, {item.Name}, {widget.Id})"
   );
 ```
 
@@ -278,17 +280,18 @@ It's interesting that we've exchanged one kind of nesting for another! Now we ca
 ```java
 new List<int>{1,2,3}
   .SelectMany(
-      number => new List<char>{'a','b','c'},
-      (number, letter) => new { number, letter }
+    number => new List<char>{'a','b','c'},
+    (number, letter) => new { number, letter }
   )
   .SelectMany(
-      ti1 => itemList,
-      (ti1, item) => { ti1, item }
+    ti1 => itemList,
+    (ti1, item) => { ti1, item }
   )
   .SelectMany(
-      ti2 => widget,
-      (ti2, widget) =>
-        $"({ti2.ti1.number}, {ti2.ti1.letter}, {ti2.item.Name}, {widget.Id})"
+    ti2 => widget,
+    (ti2, widget) =>
+      $"({ti2.ti1.number}, {ti2.ti1.letter},\
+      {ti2.item.Name}, {widget.Id})"
   );
 ```
 

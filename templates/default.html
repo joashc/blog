@@ -4,12 +4,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
   <head>
-    <script src="https://use.typekit.net/geg0pqq.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+       <script>
+        (function(d) {
+          var config = {
+            kitId: 'geg0pqq',
+            scriptTimeout: 3000,
+            async: true
+          },
+          h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+        })(document);
+    </script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>$title$</title>
-    <link rel="stylesheet" type="text/css" href="/css/tufte.css" />
+    <!--
+     <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                displayAlign: "left",
+                showProcessingMessages: false,
+                showMathMenu: true,
+                messageStyle: "none",
+                TeX: { TagSide: "left", equationNumbers: { autoNumber: "AMS" } }
+            });
+        </script>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+        </script>
+        -->
+   <link rel="stylesheet" type="text/css" href="/css/tufte.css" />
   </head>
 
   <body>

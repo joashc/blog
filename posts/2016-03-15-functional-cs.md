@@ -55,10 +55,13 @@ I thought that writing Haskellish code in C# wasn't actually that bad, but becau
 My biggest sticking points with functional C# mainly revolved around the type system.
 
 #### Type syntax
-C#'s type syntax is rather cumbersome, making writing and reading type signatures a rather unpleasant experience. Much of what makes Haskell enjoyable is encoding as much information as possible into the types and letting the compiler do as much work for you as possible. C# actively works against you in this regard. It's amazing how opaque fairly basic type signatures look:
+C#'s type syntax is rather cumbersome, making writing and reading type signatures a rather unpleasant experience. Much of what makes Haskell enjoyable is encoding as much information as possible into the types and letting the compiler do as much work for you as possible. C# actively works against you in this regard. Fairly basic type signatures look pretty opaque:
 
-```java
-IEnumerable<B> SelectMany<A, B>(this IEnumerable<A> source, Func<A, IEnumerable<B>> selector)
+```cs
+IEnumerable<B> SelectMany<A, B>(
+  this IEnumerable<A> source, 
+  Func<A, IEnumerable<B>> selector
+)
 ```
 
 compared with their Haskell equivalent:
@@ -74,10 +77,14 @@ I was always mentally translating C# signatures into their Haskell equivalent, w
 Compounding the issue is the weak type inference, forcing you to repeatedly write out type annotations:
 
 ```java
-public static Either<IConfigError, RoutingDefinition> CheckDuplicateTransports(RoutingDefinition def)
+public static Either<IConfigError, RoutingDefinition> 
+CheckDuplicateTransports(RoutingDefinition def)
 {
   var hasDuplicates = CheckDuplicates(def);
-  if (hasDuplicates) return Left<IConfigError, RoutingDefinition>(DuplicateTransports.Error);
+  if (hasDuplicates) {
+    return Left<IConfigError, RoutingDefinition>
+    (DuplicateTransports.Error);
+  }
   else return Right<IConfigError, RoutingDefinition>(def)
 }
 ```
@@ -87,7 +94,10 @@ instead of just `Left(DuplicateTransports.Error)`. You can sort of hack around t
 ```java
 public static class EitherFunctions
 {
-  public static Func<RoutingDefintion, Either<IConfigError, RoutingDefinition>>
+  public static Func<
+    RoutingDefintion,
+    Either<IConfigError, RoutingDefinition>
+  >
   RightDef = Right<IConfigError, RoutingDefinition>
 
   public static Func<IConfigError, Either<IConfigError, RoutingDefinition>>
