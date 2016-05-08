@@ -74,14 +74,14 @@ homomorphism :: [()] -> [()] -> Bool
 homomorphism a b =
   phi (mappend a b) == mappend (phi a) (phi b)
     where phi = listToSum
+```
 
-quickCheck homomorphism
--- > OK, passed 100 tests.
+```haskell
+ghci> quickCheck homomorphism -- (1)
+OK, passed 100 tests.
 
--- (2)
-listToSum (mempty :: [a]) == mempty :: Sum Int
--- > True
-
+ghci> listToSum (mempty :: [a]) == mempty :: Sum Int -- (2)
+True
 ```
 
 Let's forget some more things with yet another forgetful functor, \\(\\it{U}: \\bf{Mon} \\rightarrow \\bf{Set}\\)[^hask].
@@ -280,30 +280,34 @@ foldMap :: Monoid m => (a -> m) -> [a] -> m
 So in more Haskellish terms, we map each element of a list to a monoid, and then combine the results using the structure of that monoid.
 
 ```haskell
-foldMap Product [2,4,6]
--- Sum {getSum = 12}
+ghci> foldMap Product [2,4,6]
+Sum {getSum = 12}
 
-foldMap Product [2,4,6]
--- Product {getProduct = 48}
+ghci> foldMap Product [2,4,6]
+Product {getProduct = 48}
 ```
 
-Of course, `foldMap` is really defining a monoid homomorphism:
+Of course, `foldMap` is really defining a monoid homomorphism, which means it should map the identity element:
 
 ```haskell
--- Monoid homomorphisms map the identity element
-foldMap Product []
--- Product {getProduct = 1}
+ghci> foldMap Product []
+Product {getProduct = 1}
 
-foldMap Sum []
--- Product {getSum = 0}
+ghci> foldMap Sum []
+Product {getSum = 0}
+```
 
--- ...and preserve compositionality
+...and preserve compositionality:
+
+```haskell
 homomorphism :: [Int] -> [Int] -> Bool
 homomorphism a b = phi (a ++ b) == phi a `mappend` phi b
   where phi = foldMap Sum
+```
 
-quickCheck homomorphism
--- OK, passed 100 tests.
+```haskell
+ghci> quickCheck homomorphism
+OK, passed 100 tests.
 ```
 
 Free Monads

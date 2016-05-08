@@ -37,7 +37,7 @@ def wordMatchesPhonemes(phonemes, word):
 
 def wordsMatchingPhonemes(text, phonemes):
     words = set(re.sub("[^\w| ]", "", text.lower()).split())
-    return filter(lambda word: wordMatchesPhonemes(phonemes, word), words)
+    return [word for word in words if wordMatchesPhonemes(phonemes, word)]
 ```
 
 [^1]: There are some questions you'll never know the answer to. But nowadays we have Google, and the set of these unanswerable questions are a great deal smaller.

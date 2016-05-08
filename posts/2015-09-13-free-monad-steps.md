@@ -4,7 +4,7 @@ series: Free monads
 part: I
 ---
 
-In [the next part](/posts/2016-01-24-free-monad-theory.html) of this series, we'll discuss free monads from a category theory perspective. This first installment will be decidedly more practical, focusing on how you actually *use* free monads in Haskell, and what advantages they bring. This means I'll gloss over a lot of the mechanics of how free monads actually *work*, and make this more of a "get it done" kind of post.
+In [the next part](/posts/2016-03-23-free-monads.html) of this series, we'll discuss free monads from a category theory perspective. This first installment will be decidedly more practical, focusing on how you actually *use* free monads in Haskell, and what advantages they bring. This means I'll gloss over a lot of the mechanics of how free monads actually *work*, and make this more of a "get it done" kind of post.
 
 ## The finest imperative language?
 Simon Peyton-Jones famously said that Haskell was the world's finest imperative programming language. When I started writing Haskell, however, I literally tacked `-> IO ()` onto the end of all my functions and went to town writing imperative code.
