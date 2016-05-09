@@ -45,7 +45,7 @@ var closeWhenDone = () => {
 };
 
 renderMathjaxForFile("./_site/", "index.html", closeWhenDone);
-renderMathjaxForFile("./_site/", "index.html", closeWhenDone);
+renderMathjaxForFile("./_site/", "projects.html", closeWhenDone);
 
 posts.forEach(post => {
   renderMathjaxForFile(postDir, post, closeWhenDone);
