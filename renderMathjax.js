@@ -37,13 +37,14 @@ var pages = fs.readdirSync(pageDir);
 var projects = fs.readdirSync(projectDir);
 
 // Wait for all of these and the homepage
-var pending = posts.length + pages.length + projects.length + 1;
+var pending = posts.length + pages.length + projects.length + 2;
 
 var closeWhenDone = () => {
   pending -= 1;
   if (pending === 0) process.exit();
 };
 
+renderMathjaxForFile("./_site/", "index.html", closeWhenDone);
 renderMathjaxForFile("./_site/", "index.html", closeWhenDone);
 
 posts.forEach(post => {
